@@ -1,70 +1,143 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Text, Card } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
-export default function HomeScreen() {
+export default function App() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaProvider>
+      <View style={styles.container}>
+        {/* Profile Section */}
+        <View style={styles.profileSection}>
+          <Text style={styles.greetingText}>Halo,</Text>
+          <Text style={styles.nameText}>Achmad Syamsul Arifin</Text>
+          <Text style={styles.nimText}>(22.52.0019)</Text>
+        </View>
+
+        {/* Main Content */}
+        <View style={styles.content}>
+          {/* Button Section with Icons inside borders in one row */}
+          <View style={styles.buttonContainer}>
+            <View style={styles.buttonBox}>
+              <Icon name="book-open-outline" size={30} color="#000" />
+              <Text style={styles.buttonText}>KRS</Text>
+            </View>
+            <View style={styles.buttonBox}>
+              <Icon name="clipboard-check-outline" size={30} color="#000" />
+              <Text style={styles.buttonText}>Nilai</Text>
+            </View>
+            <View style={styles.buttonBox}>
+              <Icon name="check-circle-outline" size={30} color="#000" />
+              <Text style={styles.buttonText}>Presensi</Text>
+            </View>
+            <View style={styles.buttonBox}>
+              <Icon name="calendar" size={30} color="#000" />
+              <Text style={styles.buttonText}>Jadwal</Text>
+            </View>
+          </View>
+
+          {/* Jadwal Kuliah Section */}
+          <Text style={styles.jadwalTitle}>Jadwal Kuliah</Text>
+          <Text style={styles.jadwalText}>Jadwal kuliah tidak tersedia</Text>
+        </View>
+
+        {/* Bottom Navigation Bar */}
+        <View style={styles.bottomNav}>
+          <View style={styles.navItem}>
+            <Icon name="home" size={24} color="#000" />
+            <Text style={styles.navText}>Home</Text>
+          </View>
+          <View style={styles.navItem}>
+            <Icon name="newspaper" size={24} color="#000" />
+            <Text style={styles.navText}>Berita</Text>
+          </View>
+          <View style={styles.navItem}>
+            <Icon name="account" size={24} color="#000" />
+            <Text style={styles.navText}>Profile</Text>
+          </View>
+        </View>
+      </View>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#F5F5F5',
+  },
+  profileSection: {
+    alignItems: 'flex-start',
+    marginVertical: 10,
+    marginLeft: 20,
+  },
+  greetingText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  nameText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 4,
+  },
+  nimText: {
+    fontSize: 18,
+    color: '#555',
+    marginTop: 2,
+  },
+  content: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    flex: 1,
+  },
+  buttonContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 8,
+  },
+  buttonBox: {
     alignItems: 'center',
-    gap: 8,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    flex: 1,
+    marginHorizontal: 5,
+    maxWidth: '22%',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  buttonText: {
+    fontSize: 14,
+    marginTop: 4,
+    textAlign: 'center',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  jadwalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 16,
+    textAlign: 'left',
+    marginLeft: 20,
+  },
+  jadwalText: {
+    fontSize: 16,
+    color: '#555',
+    marginTop: 4,
+    marginLeft: 20,
+  },
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#fff',
+    padding: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#ddd',
+  },
+  navItem: {
+    alignItems: 'center',
+  },
+  navText: {
+    fontSize: 12,
+    marginTop: 4,
   },
 });
